@@ -81,4 +81,16 @@ class KinerjaBMNController extends Controller
         return redirect()->route('admin.kinerja-bmn.index')
             ->with('success', 'Data kinerja berhasil dihapus.');
     }
+
+    public function show(KinerjaBmn $kinerjaBmn)
+    {
+        // Calculate percentages if not already in model
+        $kinerjaBmn->persentase_realisasi = $kinerjaBmn->target > 0 ?
+            ($kinerjaBmn->realisasi / $kinerjaBmn->target) * 100 : 0;
+
+        $kinerjaBmn->persentase_anggaran = $kinerjaBmn->anggaran > 0 ?
+            ($kinerjaBmn->realisasi_anggaran / $kinerjaBmn->anggaran) * 100 : 0;
+
+        return view('admin.kinerja-bmn.show', compact('kinerjaBmn'));
+    }
 }

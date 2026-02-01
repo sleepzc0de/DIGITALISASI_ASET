@@ -73,4 +73,9 @@ class DashboardAsetController extends Controller
         return redirect()->route('admin.dashboard-aset.index')
             ->with('success', 'Data aset berhasil dihapus.');
     }
+
+    public function show(DashboardAset $dashboardAset)
+    {
+        return view('admin.dashboard-aset.show', compact('dashboardAset'));
+    }
 }
