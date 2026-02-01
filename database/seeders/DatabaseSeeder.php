@@ -12,6 +12,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             DashboardAsetSeeder::class,
             KinerjaBMNSeeder::class,
+            AplikasiBMNSeeder::class,
         ]);
     }
 }
