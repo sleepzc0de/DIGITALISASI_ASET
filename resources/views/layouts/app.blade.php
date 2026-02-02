@@ -168,7 +168,7 @@
                 </div>
                 <div class="border-t border-gray-800 mt-8 pt-6 text-center text-gray-400 text-sm">
                     <p>&copy; {{ date('Y') }} Digitalisasi Aset. Hak cipta dilindungi.</p>
-                    <p class="mt-1">Dibuat dengan <i class="fas fa-heart text-red-400 mx-1"></i> untuk kemajuan digitalisasi Indonesia</p>
+                    <p class="mt-1">Powered By Biro Manajemen BMN dan Pengadaan</p>
                 </div>
             </div>
         </footer>

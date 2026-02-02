@@ -41,7 +41,7 @@ class AplikasiBMN extends Model
 
     public function getStatusBadgeClass(): string
     {
-        return match($this->status) {
+        return match ($this->status) {
             'Aktif' => 'bg-green-100 text-green-800',
             'Maintenance' => 'bg-yellow-100 text-yellow-800',
             'Non-Aktif' => 'bg-red-100 text-red-800',
@@ -51,7 +51,7 @@ class AplikasiBMN extends Model
 
     public function getKategoriBadgeClass(): string
     {
-        return match($this->kategori) {
+        return match ($this->kategori) {
             'BMN' => 'bg-blue-100 text-blue-800',
             'Pengadaan' => 'bg-purple-100 text-purple-800',
             'Inventaris' => 'bg-indigo-100 text-indigo-800',
@@ -85,5 +85,33 @@ class AplikasiBMN extends Model
         }
 
         return $this->tanggal_expired->isPast();
+    }
+
+    public function getKategoriGradient(): string
+    {
+        return match ($this->kategori) {
+            'BMN' => 'from-blue-500 to-cyan-600',
+            'Pengadaan' => 'from-purple-500 to-pink-600',
+            'Inventaris' => 'from-indigo-500 to-purple-600',
+            'Monitoring' => 'from-green-500 to-emerald-600',
+            default => 'from-gray-500 to-gray-700',
+        };
+    }
+
+    public function getExpiryStatus(): string
+    {
+        if (!$this->tanggal_expired) {
+            return 'no-expiry';
+        }
+
+        if ($this->isExpired()) {
+            return 'expired';
+        }
+
+        if ($this->isExpiringSoon()) {
+            return 'expiring-soon';
+        }
+
+        return 'active';
     }
 }
