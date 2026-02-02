@@ -122,13 +122,13 @@
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <div>
                         <div class="flex items-center space-x-2 mb-4">
-                            <div class="h-10 w-10 rounded-lg bg-blue-600 flex items-center justify-center">
+                            {{-- <div class="h-10 w-10 rounded-lg bg-blue-600 flex items-center justify-center">
                                 <i class="fas fa-chart-bar text-white"></i>
-                            </div>
+                            </div> --}}
                             <span class="text-xl font-bold">Digitalisasi Aset</span>
                         </div>
                         <p class="text-gray-300 text-sm">
-                            Sistem manajemen aset digital terintegrasi untuk pengelolaan dan pemantauan aset BMN.
+                            Digitalisasi Aset Kementerian Keuangan Republik Indonesia.
                         </p>
                     </div>
                     <div>
@@ -146,11 +146,11 @@
                         <div class="space-y-3">
                             <div class="flex items-center text-gray-300">
                                 <i class="fas fa-envelope mr-3"></i>
-                                <span>support@digitalisasi-aset.com</span>
+                                <span>aul@dev.com</span>
                             </div>
                             <div class="flex items-center text-gray-300">
                                 <i class="fas fa-phone mr-3"></i>
-                                <span>+62 21 1234 5678</span>
+                                <span>rahasia</span>
                             </div>
                             <div class="flex items-center space-x-4 mt-4">
                                 <a href="#" class="h-8 w-8 rounded-full bg-blue-700 flex items-center justify-center hover:bg-blue-600 transition-colors">
