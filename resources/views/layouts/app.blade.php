@@ -47,13 +47,13 @@
                 <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
                     <div class="flex items-center justify-between">
                         <div>
-                            <h1 class="text-3xl font-bold text-gray-900">{{ $header }}</h1>
+                            <h1 class="text-sm font-bold text-gray-900">{{ $header }}</h1>
                             @if (isset($subheader))
                                 <p class="mt-2 text-gray-600">{{ $subheader }}</p>
                             @endif
                         </div>
                         @if (isset($headerActions))
-                            <div class="flex items-center space-x-3">
+                            <div class="flex items-center space-x-">
                                 {{ $headerActions }}
                             </div>
                         @endif
