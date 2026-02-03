@@ -10,6 +10,8 @@ class PenghapusanBMN extends Model
 {
     use HasFactory;
 
+     protected $table = 'penghapusan_bmns';
+
     protected $fillable = [
         'nomor_sk',
         'nama_aset',

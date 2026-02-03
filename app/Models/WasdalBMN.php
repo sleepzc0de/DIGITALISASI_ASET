@@ -10,6 +10,8 @@ class WasdalBMN extends Model
 {
     use HasFactory;
 
+     protected $table = 'wasdal_bmns';
+
     protected $fillable = [
         'jenis_wasdal',
         'nomor_laporan',

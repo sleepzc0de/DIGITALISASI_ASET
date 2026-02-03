@@ -10,6 +10,8 @@ class PenatausahaanBMN extends Model
 {
     use HasFactory;
 
+     protected $table = 'penatausahaan_bmns';
+
     protected $fillable = [
         'kode_barang',
         'nup',

@@ -10,6 +10,8 @@ class PemindahtangananBMN extends Model
 {
     use HasFactory;
 
+     protected $table = 'pemindahtanganan_bmns';
+
     protected $fillable = [
         'nomor_laporan',
         'jenis_pemindahtanganan',
