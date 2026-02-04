@@ -103,4 +103,111 @@
                             <span class="text-sm font-semibold text-gray-900">{{ number_format($wasdal->getPersentaseVerifikasi(), 1) }}%</span>
                         </div>
                         <div class="w-full bg-gray-200 rounded-full h-4">
-                            <div class="bg-green-600 h-4 rounded-full transition-all duration-
+                            <div class="bg-green-600 h-4 rounded-full transition-all duration-500" style="width: {{ $wasdal->getPersentaseVerifikasi() }}%"></div>
+</div>
+</div>
+@endif
+                <!-- Total Nilai Buku -->
+                @if($wasdal->total_nilai_buku)
+                <div class="bg-purple-50 rounded-xl p-5 border-l-4 border-purple-500 mt-4">
+                    <h4 class="text-sm font-medium text-gray-600 mb-2">Total Nilai Buku</h4>
+                    <p class="text-2xl font-bold text-gray-900">Rp {{ number_format($wasdal->total_nilai_buku, 0, ',', '.') }}</p>
+                </div>
+                @endif
+            </div>
+
+            <!-- Kondisi Aset -->
+            <div class="mb-8 border-t border-gray-200 pt-6">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">Kondisi Aset</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-green-50 rounded-xl p-5 border-l-4 border-green-500">
+                        <h4 class="text-sm font-medium text-gray-600 mb-2">Kondisi Baik</h4>
+                        <p class="text-3xl font-bold text-gray-900">{{ number_format($wasdal->aset_kondisi_baik) }}</p>
+                    </div>
+                    <div class="bg-yellow-50 rounded-xl p-5 border-l-4 border-yellow-500">
+                        <h4 class="text-sm font-medium text-gray-600 mb-2">Rusak Ringan</h4>
+                        <p class="text-3xl font-bold text-gray-900">{{ number_format($wasdal->aset_kondisi_rusak_ringan) }}</p>
+                    </div>
+                    <div class="bg-red-50 rounded-xl p-5 border-l-4 border-red-500">
+                        <h4 class="text-sm font-medium text-gray-600 mb-2">Rusak Berat</h4>
+                        <p class="text-3xl font-bold text-gray-900">{{ number_format($wasdal->aset_kondisi_rusak_berat) }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Temuan -->
+            @if($wasdal->temuan)
+            <div class="mb-8 border-t border-gray-200 pt-6">
+                <h3 class="text-lg font-semibold text-gray-900 mb-3">Temuan</h3>
+                <div class="bg-yellow-50 rounded-xl p-5 border-l-4 border-yellow-500">
+                    <p class="text-gray-700 whitespace-pre-line leading-relaxed">{{ $wasdal->temuan }}</p>
+                </div>
+            </div>
+            @endif
+
+            <!-- Rekomendasi -->
+            @if($wasdal->rekomendasi)
+            <div class="mb-8 border-t border-gray-200 pt-6">
+                <h3 class="text-lg font-semibold text-gray-900 mb-3">Rekomendasi</h3>
+                <div class="bg-blue-50 rounded-xl p-5 border-l-4 border-blue-500">
+                    <p class="text-gray-700 whitespace-pre-line leading-relaxed">{{ $wasdal->rekomendasi }}</p>
+                </div>
+            </div>
+            @endif
+
+            <!-- Petugas -->
+            <div class="mb-8 border-t border-gray-200 pt-6">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">Petugas</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    @if($wasdal->petugas_pelaksana)
+                    <div class="bg-indigo-50 rounded-xl p-5">
+                        <h4 class="text-sm font-medium text-gray-600 mb-2">Petugas Pelaksana</h4>
+                        <p class="text-lg font-semibold text-gray-900">{{ $wasdal->petugas_pelaksana }}</p>
+                    </div>
+                    @endif
+
+                    @if($wasdal->pejabat_penerima)
+                    <div class="bg-purple-50 rounded-xl p-5">
+                        <h4 class="text-sm font-medium text-gray-600 mb-2">Pejabat Penerima</h4>
+                        <p class="text-lg font-semibold text-gray-900">{{ $wasdal->pejabat_penerima }}</p>
+                    </div>
+                    @endif
+                </div>
+            </div>
+
+            <!-- Keterangan -->
+            @if($wasdal->keterangan)
+            <div class="mb-8 border-t border-gray-200 pt-6">
+                <h3 class="text-lg font-semibold text-gray-900 mb-3">Keterangan</h3>
+                <p class="text-gray-700 leading-relaxed whitespace-pre-line">{{ $wasdal->keterangan }}</p>
+            </div>
+            @endif
+
+            <!-- File Dokumen -->
+            <div class="border-t border-gray-200 pt-6">
+                <h3 class="text-lg font-semibold text-gray-900 mb-3">Dokumen Laporan</h3>
+                <div class="flex flex-wrap gap-3">
+                    @if($wasdal->getFileLaporanUrl())
+                    <a href="{{ $wasdal->getFileLaporanUrl() }}" target="_blank" class="inline-flex items-center px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                        </svg>
+                        Download Laporan
+                    </a>
+                    @endif
+
+                    @if($wasdal->getFileLampiranUrl())
+                    <a href="{{ $wasdal->getFileLampiranUrl() }}" target="_blank" class="inline-flex items-center px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                        </svg>
+                        Download Lampiran
+                    </a>
+                    @endif
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</x-app-layout>
+
