@@ -13,7 +13,7 @@
                             <span class="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                                 Digitalisasi Aset
                             </span>
-                            <p class="text-xs text-gray-500 mt-0.5">Sistem Manajemen BMN</p>
+                            <p class="text-xs text-gray-500 mt-0.5">Kementerian Keuangan RI</p>
                         </div>
                     </a>
                 </div>

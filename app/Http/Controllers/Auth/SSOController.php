@@ -184,8 +184,8 @@ class SSOController extends Controller
         $jabatan = $userInfo['position'] ?? $userInfo['jabatan'] ?? null;
         $unitKerja = $userInfo['unit_kerja'] ?? $userInfo['organization'] ?? null;
         $kodeSatker = $userInfo['kode_satker'] ?? null;
-        $namaSatker = $userInfo['nama_satker'] ?? null;
-        $avatar = $userInfo['picture'] ?? null;
+        $namaSatker = $userInfo['satker'] ?? null;
+        $avatar = $userInfo['gravatar'] ?? null;
 
         if (!$ssoId) {
             throw new \Exception('SSO ID not found in user info');
