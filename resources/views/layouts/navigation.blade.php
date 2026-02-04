@@ -509,7 +509,7 @@
                     <span>Profil Saya</span>
                 </a>
 
-                <form method="POST" action="{{ route('logout') }}" class="contents">
+                <form method="POST" action="{{ auth()->user()->isSSOUser() ? route('sso.logout') : route('logout') }}">
                     @csrf
                     <button type="submit"
                         class="flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-red-50 text-red-600 w-full">

@@ -175,7 +175,7 @@
             </div>
         </section>
         <!-- Footer -->
-        <footer class="relative z-10 py-4 px-4 mt-2 border-t border-white/10">
+        <footer class="relative z-10 py-12 px-4 mt-12 border-t border-white/10">
             <div class="container mx-auto text-center text-gray-400">
                 <p class="font-semibold text-gray-300">&copy; 2026 Kementerian Keuangan Republik Indonesia</p>
                 <p class="text-sm mt-2">Powered By Biro Manajemen BMN dan Pengadaan</p>

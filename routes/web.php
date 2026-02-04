@@ -16,12 +16,18 @@ use App\Http\Controllers\ManajemenBMN\WasdalBMNController;
 // Admin Controllers
 use App\Http\Controllers\Admin\DashboardAsetController;
 use App\Http\Controllers\Admin\KinerjaBMNController;
-
+use App\Http\Controllers\Auth\SsoController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+// SSO Routes
+Route::get('sso/login', [SsoController::class, 'redirectToSSO'])->name('sso.login');
+Route::get('sso/callback/login', [SSOController::class, 'handleCallback'])->name('sso.callback');
+Route::post('sso/logout', [SSOController::class, 'logout'])->name('sso.logout');
+Route::get('sso/logout', [SSOController::class, 'logout']); // Support GET method juga
 
 // Authenticated Routes
 Route::middleware('auth')->group(function () {
@@ -78,11 +84,14 @@ Route::middleware('auth')->group(function () {
     });
 
     // === ADMIN ROUTES ===
-    Route::middleware('admin')->prefix('admin')->name('admin.')->group(function () {
+    Route::middleware(['admin','super_admin'])->prefix('admin')->name('admin.')->group(function () {
         // Dashboard & Kinerja
         Route::resource('dashboard-aset', DashboardAsetController::class);
         Route::resource('kinerja-bmn', KinerjaBMNController::class);
         Route::resource('aplikasi-bmn', \App\Http\Controllers\Admin\AplikasiBMNController::class);
+
+         // User Management
+         Route::resource('users', \App\Http\Controllers\Admin\UserController::class);
 
         // === ADMIN MANAJEMEN BMN ROUTES ===
         Route::prefix('manajemen-bmn')->name('manajemen-bmn.')->group(function () {

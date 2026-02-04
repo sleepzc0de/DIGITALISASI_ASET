@@ -35,4 +35,17 @@ return [
         ],
     ],
 
+    'sso' => [
+        'client_id' => env('SSO_CLIENT_ID'),
+        'client_secret' => env('SSO_CLIENT_SECRET'),
+        'redirect_uri' => env('SSO_REDIRECT_URI'),
+        'logout_redirect_uri' => env('SSO_LOGOUT_REDIRECT_URI'),
+        'base_url' => env('SSO_BASE_URL'),
+        'authorize_url' => env('SSO_AUTHORIZE_URL'),
+        'token_url' => env('SSO_TOKEN_URL'),
+        'userinfo_url' => env('SSO_USERINFO_URL'),
+        'logout_url' => env('SSO_LOGOUT_URL'),
+        'scope' => env('SSO_SCOPE', 'openid profile'),
+    ],
+
 ];
