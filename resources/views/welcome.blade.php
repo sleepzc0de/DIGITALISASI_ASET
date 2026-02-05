@@ -3,6 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="title" content="Digitalisasi Aset BMN - SIDITA">
+    <meta name="description" content="Sistem informasi digitalisasi aset BMN Kementerian Keuangan BA 015. Kelola siklus pengelolaan barang milik negara dari perencanaan hingga penghapusan secara digital dan terintegrasi.">
+    <meta name="keywords" content="BMN, Barang Milik Negara, Digitalisasi Aset, Kementerian Keuangan, Kemenkeu, Pengelolaan Aset, SIMAK BMN, Aset Pemerintah, BA 015, Manajemen BMN, Pengadaan, Penatausahaan BMN, Aset Digital">
+    <meta name="author" content="Biro Manajemen BMN dan Pengadaan - Kementerian Keuangan RI">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="Indonesian">
+    <meta name="revisit-after" content="7 days">
+
+     <!-- Open Graph / Facebook Meta Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://digitalisasi-aset.kemenkeu.go.id/">
+    <meta property="og:title" content="Digitalisasi Aset BMN - Kementerian Keuangan RI">
+    <meta property="og:description" content="Sistem informasi digitalisasi aset BMN Kementerian Keuangan. Kelola siklus pengelolaan barang milik negara secara digital dan terintegrasi.">
+    <meta property="og:image" content="{{asset('logo_kemenkeu.png')}}">
+    <meta property="og:site_name" content="Digitalisasi Aset Kemenkeu">
+    <meta property="og:locale" content="id_ID">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://digitalisasi-aset.kemenkeu.go.id/">
+    <meta name="twitter:title" content="Digitalisasi Aset BMN - Kementerian Keuangan RI">
+    <meta name="twitter:description" content="Sistem informasi digitalisasi aset BMN Kementerian Keuangan. Kelola siklus pengelolaan barang milik negara secara digital.">
+    <meta name="twitter:image" content="{{asset('logo_kemenkeu.png')}}">
+
+     <!-- Canonical URL -->
+    <link rel="canonical" href="https://digitalisasi-aset.kemenkeu.go.id">
+     <!-- Favicon -->
+     <link rel="icon" type="image/png" href="{{ asset('logo_kemenkeu.png') }}">
+<link rel="shortcut icon" type="image/png" href="{{ asset('logo_kemenkeu.png') }}">
+<link rel="apple-touch-icon" href="{{ asset('logo_kemenkeu.png') }}">
+
+
     <title>Digitalisasi Aset BMN - Kementerian Keuangan</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
@@ -175,7 +206,7 @@
             </div>
         </section>
         <!-- Footer -->
-        <footer class="relative z-10 py-12 px-4 mt-12 border-t border-white/10">
+        <footer class="relative z-10 py-4 px-4 mt-2 border-t border-white/10">
             <div class="container mx-auto text-center text-gray-400">
                 <p class="font-semibold text-gray-300">&copy; 2026 Kementerian Keuangan Republik Indonesia</p>
                 <p class="text-sm mt-2">Powered By Biro Manajemen BMN dan Pengadaan</p>

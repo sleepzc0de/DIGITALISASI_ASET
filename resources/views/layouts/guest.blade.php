@@ -4,23 +4,23 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
-
         <title>{{ __('Login') }} - {{ config('app.name', 'Digitalisasi Aset') }}</title>
 
-        <!-- Fonts -->
+        <!-- Preconnect untuk resource pihak ketiga -->
         <link rel="preconnect" href="https://fonts.bunny.net">
+        <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+        <link rel="preconnect" href="https://unpkg.com">
+
+        <!-- Fonts dengan display=swap untuk menghindari FOIT -->
         <link href="https://fonts.bunny.net/css?family=inter:300,400,500,600,700,800&display=swap" rel="stylesheet" />
 
-        <!-- Font Awesome Icons -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <!-- Font Awesome - gunakan defer -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-        <!-- AOS Animation -->
-        <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-
+        <!-- Inline Critical CSS -->
         <style>
             .animate-float {
                 animation: float 6s ease-in-out infinite;
@@ -33,20 +33,28 @@
                 animation: float 8s ease-in-out infinite;
                 animation-delay: 1s;
             }
-            .animate-pulse-glow {
-                animation: pulse-glow 2s ease-in-out infinite alternate;
-            }
-            @keyframes pulse-glow {
-                from { box-shadow: 0 0 20px rgba(59, 130, 246, 0.5); }
-                to { box-shadow: 0 0 30px rgba(59, 130, 246, 0.8); }
-            }
             .bg-grid-pattern {
                 background-image:
                     radial-gradient(circle at 25px 25px, rgba(255, 255, 255, 0.1) 2%, transparent 0%),
                     radial-gradient(circle at 75px 75px, rgba(255, 255, 255, 0.1) 2%, transparent 0%);
                 background-size: 100px 100px;
             }
+            #loading-spinner {
+                position: fixed;
+                inset: 0;
+                background: rgba(17, 24, 39, 0.8);
+                backdrop-filter: blur(4px);
+                z-index: 50;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: opacity 300ms;
+            }
         </style>
+
+        <!-- AOS CSS - lazy load -->
+        <link rel="preload" href="https://unpkg.com/aos@2.3.1/dist/aos.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css"></noscript>
     </head>
     <body class="font-sans antialiased min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900">
         <!-- Animated Background Elements -->
@@ -58,7 +66,7 @@
         </div>
 
         <!-- Loading Spinner -->
-        <div id="loading-spinner" class="fixed inset-0 bg-gray-900/80 backdrop-blur-sm z-50 flex items-center justify-center transition-opacity duration-300">
+        <div id="loading-spinner">
             <div class="text-center">
                 <div class="relative inline-block">
                     <div class="w-24 h-24 border-4 border-blue-200 rounded-full"></div>
@@ -90,7 +98,7 @@
                                 <span class="text-3xl font-bold bg-gradient-to-r from-white to-blue-100 bg-clip-text text-transparent">
                                     Digitalisasi Aset
                                 </span>
-                                <p class="text-blue-200/80 text-sm mt-1">Sistem Manajemen BMN</p>
+                                <p class="text-blue-200/80 text-sm mt-1">Kementerian Keuangan RI</p>
                             </div>
                         </a>
                     </div>
@@ -98,9 +106,9 @@
                     <!-- Hero Content -->
                     <div class="max-w-lg" data-aos="fade-right" data-aos-delay="200">
                         <h1 class="text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight">
-                            Sistem Manajemen Aset
+                            Sistem
                             <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
-                                Digital Terintegrasi
+                                Digital Aset (SiDITA)
                             </span>
                         </h1>
                         <p class="text-lg text-blue-100/80 mb-8 leading-relaxed">
@@ -132,23 +140,7 @@
                     </div>
                 </div>
 
-                <!-- Footer Stats -->
-                <div class="relative z-10 mt-8 lg:mt-0">
-                    <div class="grid grid-cols-3 gap-4">
-                        <div class="text-center">
-                            <div class="text-2xl font-bold text-white">500+</div>
-                            <div class="text-sm text-blue-200/70">Aset Terkelola</div>
-                        </div>
-                        <div class="text-center">
-                            <div class="text-2xl font-bold text-white">100%</div>
-                            <div class="text-sm text-blue-200/70">Keamanan Data</div>
-                        </div>
-                        <div class="text-center">
-                            <div class="text-2xl font-bold text-white">24/7</div>
-                            <div class="text-sm text-blue-200/70">Support</div>
-                        </div>
-                    </div>
-                </div>
+
             </div>
 
             <!-- Right Side - Login Form -->
@@ -166,53 +158,11 @@
 
                         {{ $slot }}
 
-                        <!-- Divider -->
-                        <div class="relative my-8">
-                            <div class="absolute inset-0 flex items-center">
-                                <div class="w-full border-t border-white/20"></div>
-                            </div>
-                            <div class="relative flex justify-center text-sm">
-                                <span class="px-4 bg-white/5 text-blue-100/70 backdrop-blur-sm rounded-full">
-                                    Atau lanjutkan dengan
-                                </span>
-                            </div>
-                        </div>
-
-                        <!-- Social Login (Optional) -->
-                        <div class="grid grid-cols-2 gap-3 mb-8">
-                            <button type="button" class="flex items-center justify-center space-x-2 px-4 py-3 bg-white/10 hover:bg-white/20 text-white rounded-xl transition-all duration-300 hover:scale-[1.02]">
-                                <i class="fab fa-google text-red-400"></i>
-                                <span>Google</span>
-                            </button>
-                            <button type="button" class="flex items-center justify-center space-x-2 px-4 py-3 bg-white/10 hover:bg-white/20 text-white rounded-xl transition-all duration-300 hover:scale-[1.02]">
-                                <i class="fab fa-microsoft text-blue-400"></i>
-                                <span>Microsoft</span>
-                            </button>
-                        </div>
-
                         <!-- Footer Links -->
-                        <div class="text-center space-y-3">
-                            <p class="text-blue-100/70 text-sm">
-                                Belum punya akun?
-                                @if (Route::has('register'))
-                                    <a href="{{ route('register') }}" class="text-white font-semibold hover:text-blue-300 transition-colors ml-1">
-                                        Daftar di sini
-                                    </a>
-                                @endif
-                            </p>
+                        <div class="text-center space-y-3 mt-6">
                             <div class="text-xs text-blue-100/60">
                                 © {{ date('Y') }} Digitalisasi Aset. Hak cipta dilindungi.
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Demo Credentials -->
-                    <div class="mt-6 p-4 bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10">
-                        <div class="flex items-center space-x-3 text-sm text-blue-100/80">
-                            <i class="fas fa-info-circle text-blue-300"></i>
-                            <div>
-                                <p class="font-semibold">Demo Credentials:</p>
-                                <p class="text-xs mt-1">admin@example.com / password</p>
+                                <p>Powered By Biro Manajemen BMN dan Pengadaan</p>
                             </div>
                         </div>
                     </div>
@@ -220,47 +170,29 @@
             </div>
         </main>
 
-        <!-- Back to Top Button -->
-        <button id="backToTop" class="fixed bottom-6 right-6 h-12 w-12 bg-gradient-to-br from-blue-500 to-purple-500 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110 hidden z-40 flex items-center justify-center">
-            <i class="fas fa-chevron-up"></i>
-        </button>
-
+        <!-- Scripts diletakkan di akhir untuk performa optimal -->
         <script>
-            // Loading Spinner
-            window.addEventListener('load', function() {
+            // Loading Spinner - optimized
+            (function() {
                 const spinner = document.getElementById('loading-spinner');
-                spinner.style.opacity = '0';
-                setTimeout(() => spinner.style.display = 'none', 300);
-            });
 
-            // Initialize AOS
-            AOS.init({
-                duration: 800,
-                once: true,
-                offset: 50
-            });
-
-            // Back to Top Button
-            const backToTop = document.getElementById('backToTop');
-            window.addEventListener('scroll', function() {
-                if (window.pageYOffset > 300) {
-                    backToTop.classList.remove('hidden');
+                if (document.readyState === 'complete') {
+                    hideSpinner();
                 } else {
-                    backToTop.classList.add('hidden');
+                    window.addEventListener('load', hideSpinner);
                 }
-            });
 
-            backToTop.addEventListener('click', function() {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
-
-            // Add floating animation to background circles
-            document.addEventListener('DOMContentLoaded', function() {
-                const circles = document.querySelectorAll('.animate-float, .animate-float-delayed');
-                circles.forEach(circle => {
-                    circle.style.animationPlayState = 'running';
-                });
-            });
+                function hideSpinner() {
+                    spinner.style.opacity = '0';
+                    setTimeout(() => {
+                        spinner.style.display = 'none';
+                        spinner.remove(); // Hapus dari DOM
+                    }, 300);
+                }
+            })();
         </script>
+
+        <!-- AOS Script - lazy load -->
+        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer onload="AOS.init({duration: 800, once: true, offset: 50})"></script>
     </body>
 </html>
