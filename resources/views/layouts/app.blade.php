@@ -125,7 +125,7 @@
                             {{-- <div class="h-10 w-10 rounded-lg bg-blue-600 flex items-center justify-center">
                                 <i class="fas fa-chart-bar text-white"></i>
                             </div> --}}
-                            <span class="text-xl font-bold">Digitalisasi Aset</span>
+                            <span class="text-xl font-bold">Sistem Digitalisasi Aset</span>
                         </div>
                         <p class="text-gray-300 text-sm">
                             Digitalisasi Aset Kementerian Keuangan Republik Indonesia.
@@ -146,20 +146,17 @@
                         <div class="space-y-3">
                             <div class="flex items-center text-gray-300">
                                 <i class="fas fa-envelope mr-3"></i>
-                                <span>aul@dev.com</span>
+                                <span>kemenkeu.prime@kemenkeu.go.id</span>
                             </div>
                             <div class="flex items-center text-gray-300">
                                 <i class="fas fa-phone mr-3"></i>
-                                <span>rahasia</span>
+                                <span>0813-1000-4134</span>
                             </div>
                             <div class="flex items-center space-x-4 mt-4">
-                                <a href="#" class="h-8 w-8 rounded-full bg-blue-700 flex items-center justify-center hover:bg-blue-600 transition-colors">
+                                <a href="https://www.facebook.com/pastikanasetkita" class="h-8 w-8 rounded-full bg-blue-700 flex items-center justify-center hover:bg-blue-600 transition-colors">
                                     <i class="fab fa-facebook-f"></i>
                                 </a>
-                                <a href="#" class="h-8 w-8 rounded-full bg-blue-400 flex items-center justify-center hover:bg-blue-300 transition-colors">
-                                    <i class="fab fa-twitter"></i>
-                                </a>
-                                <a href="#" class="h-8 w-8 rounded-full bg-pink-600 flex items-center justify-center hover:bg-pink-500 transition-colors">
+                                <a href="https://www.instagram.com/pastikanasetkita/" class="h-8 w-8 rounded-full bg-pink-600 flex items-center justify-center hover:bg-pink-500 transition-colors">
                                     <i class="fab fa-instagram"></i>
                                 </a>
                             </div>
