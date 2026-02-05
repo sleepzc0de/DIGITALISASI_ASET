@@ -132,4 +132,67 @@
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Metode Penghapusan</label>
                         <input type="text" name="metode_penghapusan" value="{{ old('metode_penghapusan') }}" placeholder="Pemusnahan, Pelelangan, dll"
-                            class="w-full rounded-lg border-
+                            class="w-full rounded-lg border-gray-300 focus:border-indigo-500 focus:ring-indigo-500">
+@error('metode_penghapusan')
+<p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+@enderror
+</div>
+                <!-- Status -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Status <span class="text-red-500">*</span></label>
+                    <select name="status" required class="w-full rounded-lg border-gray-300 focus:border-indigo-500 focus:ring-indigo-500">
+                        <option value="Draft" {{ old('status') == 'Draft' ? 'selected' : '' }}>Draft</option>
+                        <option value="Proses" {{ old('status') == 'Proses' ? 'selected' : '' }}>Proses</option>
+                        <option value="Selesai" {{ old('status') == 'Selesai' ? 'selected' : '' }}>Selesai</option>
+                        <option value="Dibatalkan" {{ old('status') == 'Dibatalkan' ? 'selected' : '' }}>Dibatalkan</option>
+                    </select>
+                    @error('status')
+                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <!-- File SK -->
+                <div class="md:col-span-2">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">File SK</label>
+                    <input type="file" name="file_sk" accept=".pdf"
+                        class="w-full rounded-lg border-gray-300 focus:border-indigo-500 focus:ring-indigo-500">
+                    <p class="mt-1 text-xs text-gray-500">Format: PDF. Maksimal 5MB</p>
+                    @error('file_sk')
+                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <!-- File BA Penghapusan -->
+                <div class="md:col-span-2">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">File Berita Acara Penghapusan</label>
+                    <input type="file" name="file_ba_penghapusan" accept=".pdf"
+                        class="w-full rounded-lg border-gray-300 focus:border-indigo-500 focus:ring-indigo-500">
+                    <p class="mt-1 text-xs text-gray-500">Format: PDF. Maksimal 5MB</p>
+                    @error('file_ba_penghapusan')
+                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <!-- Keterangan -->
+                <div class="md:col-span-2">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Keterangan</label>
+                    <textarea name="keterangan" rows="3"
+                        class="w-full rounded-lg border-gray-300 focus:border-indigo-500 focus:ring-indigo-500">{{ old('keterangan') }}</textarea>
+                    @error('keterangan')
+                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                    @enderror
+                </div>
+            </div>
+
+            <div class="mt-8 flex justify-end space-x-3">
+                <a href="{{ route('admin.manajemen-bmn.penghapusan.index') }}" class="px-6 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition">
+                    Batal
+                </a>
+                <button type="submit" class="px-6 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition">
+                    Simpan
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+</x-app-layout>
