@@ -138,7 +138,7 @@
                     <h1 class="text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight">
                         Sistem
                         <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
-                            Digital Aset (SIDITA)
+                            Digitalisasi Aset (SIDITA)
                         </span>
                     </h1>
                     <p class="text-lg text-blue-100/80 mb-8 leading-relaxed" style="text-align: justify;">
