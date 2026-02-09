@@ -5,6 +5,7 @@ namespace App\Http\Controllers\ManajemenBMN;
 use App\Http\Controllers\Controller;
 use App\Models\PemindahtangananBMN;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class PemindahtangananBMNController extends Controller
 {
@@ -20,6 +21,10 @@ class PemindahtangananBMNController extends Controller
             $query->where('status_pnbp', $request->status_pnbp);
         }
 
+        if ($request->has('tahun') && $request->tahun) {
+            $query->whereYear('tanggal_pemindahtanganan', $request->tahun);
+        }
+
         $pemindahtanganans = $query->latest()->paginate(15);
 
         $stats = [
@@ -29,7 +34,49 @@ class PemindahtangananBMNController extends Controller
             'belum_setor' => PemindahtangananBMN::where('status_pnbp', 'Belum Setor')->sum('nilai_pnbp'),
         ];
 
-        return view('manajemen-bmn.pemindahtanganan.index', compact('pemindahtanganans', 'stats'));
+        // Data untuk Chart
+        // 1. Data per Jenis Pemindahtanganan
+        $jenisData = PemindahtangananBMN::select('jenis_pemindahtanganan')
+            ->selectRaw('COUNT(*) as jumlah, SUM(nilai_pnbp) as total_pnbp')
+            ->groupBy('jenis_pemindahtanganan')
+            ->get();
+
+        // 2. Data per Status PNBP
+        $statusData = PemindahtangananBMN::select('status_pnbp')
+            ->selectRaw('COUNT(*) as jumlah, SUM(nilai_pnbp) as total_pnbp')
+            ->groupBy('status_pnbp')
+            ->get();
+
+        // 3. Data per Bulan (12 bulan terakhir)
+        $bulanLabels = [];
+        $bulanData = [];
+
+        for ($i = 11; $i >= 0; $i--) {
+            $date = Carbon::now()->subMonths($i);
+            $bulanLabels[] = $date->format('M Y');
+
+            $totalBulan = PemindahtangananBMN::whereYear('tanggal_pemindahtanganan', $date->year)
+                ->whereMonth('tanggal_pemindahtanganan', $date->month)
+                ->sum('nilai_pnbp');
+
+            $bulanData[] = $totalBulan;
+        }
+
+        // 4. Top 5 Aset dengan Nilai PNBP Tertinggi
+        $topAset = PemindahtangananBMN::select('nama_aset', 'nilai_pnbp', 'jenis_pemindahtanganan')
+            ->orderBy('nilai_pnbp', 'desc')
+            ->limit(5)
+            ->get();
+
+        return view('manajemen-bmn.pemindahtanganan.index', compact(
+            'pemindahtanganans',
+            'stats',
+            'jenisData',
+            'statusData',
+            'bulanLabels',
+            'bulanData',
+            'topAset'
+        ));
     }
 
     public function show(PemindahtangananBMN $pemindahtanganan)
