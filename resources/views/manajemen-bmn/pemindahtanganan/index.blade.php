@@ -124,8 +124,109 @@
             </div>
         </div>
 
+        <!-- Charts Section -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8" data-aos="fade-up" data-aos-delay="150">
+            <!-- Chart 1: Distribusi Jenis Pemindahtanganan -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 border border-gray-100">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-semibold text-gray-900">Distribusi Jenis Pemindahtanganan</h3>
+                    <span class="text-sm text-gray-500">Berdasarkan Jumlah</span>
+                </div>
+                <div class="h-64">
+                    <canvas id="jenisChart"></canvas>
+                </div>
+                <div class="mt-4 pt-4 border-t border-gray-100">
+                    <div class="grid grid-cols-2 gap-4">
+                        @foreach($jenisData as $jenis)
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-gray-600">{{ $jenis->jenis_pemindahtanganan }}</span>
+                            <span class="text-sm font-semibold text-gray-900">{{ $jenis->jumlah }}</span>
+                        </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chart 2: Distribusi Status PNBP -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 border border-gray-100">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-semibold text-gray-900">Distribusi Status PNBP</h3>
+                    <span class="text-sm text-gray-500">Berdasarkan Nilai</span>
+                </div>
+                <div class="h-64">
+                    <canvas id="statusChart"></canvas>
+                </div>
+                <div class="mt-4 pt-4 border-t border-gray-100">
+                    <div class="space-y-3">
+                        @foreach($statusData as $status)
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                @php
+                                    $badgeClass = match($status->status_pnbp) {
+                                        'Belum Setor' => 'bg-red-100 text-red-800',
+                                        'Sudah Setor' => 'bg-green-100 text-green-800',
+                                        'Dibebaskan' => 'bg-blue-100 text-blue-800',
+                                        default => 'bg-gray-100 text-gray-800',
+                                    };
+                                @endphp
+                                <span class="px-2 py-1 text-xs font-semibold rounded-full {{ $badgeClass }}">
+                                    {{ $status->status_pnbp }}
+                                </span>
+                            </div>
+                            <span class="text-sm font-semibold text-gray-900">
+                                Rp {{ number_format($status->total_pnbp, 0, ',', '.') }}
+                            </span>
+                        </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chart 3: Trend PNBP Per Bulan -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 border border-gray-100 lg:col-span-2">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-semibold text-gray-900">Trend PNBP Per Bulan (12 Bulan Terakhir)</h3>
+                    <span class="text-sm text-gray-500">Dalam Miliar Rupiah</span>
+                </div>
+                <div class="h-72">
+                    <canvas id="monthlyChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Top 5 Aset dengan Nilai PNBP Tertinggi -->
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-8 border border-gray-100" data-aos="fade-up" data-aos-delay="200">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-lg font-semibold text-gray-900">Top 5 Aset dengan Nilai PNBP Tertinggi</h3>
+                <span class="text-sm text-gray-500">Performa Terbaik</span>
+            </div>
+            <div class="space-y-4">
+                @foreach($topAset as $index => $aset)
+                <div class="flex items-center justify-between p-4 bg-gradient-to-r from-gray-50 to-white rounded-xl border border-gray-100 hover:border-indigo-200 transition-all duration-200">
+                    <div class="flex items-center space-x-4">
+                        <div class="flex-shrink-0">
+                            <div class="h-10 w-10 rounded-lg bg-indigo-100 flex items-center justify-center">
+                                <span class="text-indigo-600 font-bold">{{ $index + 1 }}</span>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-gray-900">{{ $aset->nama_aset }}</h4>
+                            <span class="inline-block mt-1 px-2 py-1 text-xs font-semibold rounded-full bg-indigo-100 text-indigo-800">
+                                {{ $aset->jenis_pemindahtanganan }}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-lg font-bold text-gray-900">Rp {{ number_format($aset->nilai_pnbp, 0, ',', '.') }}</p>
+                        <p class="text-sm text-gray-500">Nilai PNBP</p>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        </div>
+
         <!-- Filter Section with Modern Design -->
-        <div class="bg-white rounded-2xl shadow-lg p-6 mb-8 border border-gray-100" data-aos="fade-up" data-aos-delay="150">
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-8 border border-gray-100" data-aos="fade-up" data-aos-delay="250">
             <div class="flex items-center justify-between mb-4">
                 <h3 class="text-lg font-semibold text-gray-900">Filter & Pencarian</h3>
                 <a href="{{ route('manajemen-bmn.pemindahtanganan.index') }}" class="text-sm text-indigo-600 hover:text-indigo-800 font-medium">
@@ -177,7 +278,7 @@
         </div>
 
         <!-- Table Section -->
-        <div class="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100" data-aos="fade-up" data-aos-delay="200">
+        <div class="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100" data-aos="fade-up" data-aos-delay="300">
             <div class="px-6 py-4 border-b border-gray-200 bg-gradient-to-r from-gray-50 to-white">
                 <div class="flex items-center justify-between">
                     <div>
@@ -310,7 +411,7 @@
         </div>
 
         <!-- Quick Stats -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8" data-aos="fade-up" data-aos-delay="250">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8" data-aos="fade-up" data-aos-delay="350">
             <div class="bg-white rounded-2xl shadow p-6 border border-gray-100">
                 <div class="flex items-center">
                     <div class="flex-shrink-0">
@@ -369,6 +470,188 @@
         </div>
     </div>
 
+    @push('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Data dari controller
+            const jenisData = @json($jenisData);
+            const statusData = @json($statusData);
+            const bulanLabels = @json($bulanLabels);
+            const bulanData = @json($bulanData);
+
+            // Warna untuk chart
+            const chartColors = [
+                'rgba(59, 130, 246, 0.8)',   // Blue
+                'rgba(16, 185, 129, 0.8)',   // Emerald
+                'rgba(245, 158, 11, 0.8)',   // Amber
+                'rgba(139, 92, 246, 0.8)',   // Purple
+                'rgba(239, 68, 68, 0.8)',    // Red
+                'rgba(99, 102, 241, 0.8)',   // Indigo
+            ];
+
+            // Chart 1: Distribusi Jenis Pemindahtanganan (Pie Chart)
+            const jenisCtx = document.getElementById('jenisChart');
+            if (jenisCtx) {
+                new Chart(jenisCtx, {
+                    type: 'pie',
+                    data: {
+                        labels: jenisData.map(item => item.jenis_pemindahtanganan),
+                        datasets: [{
+                            data: jenisData.map(item => item.jumlah),
+                            backgroundColor: chartColors.slice(0, jenisData.length),
+                            borderWidth: 2,
+                            borderColor: '#ffffff',
+                            hoverOffset: 15
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: {
+                                    padding: 20,
+                                    usePointStyle: true,
+                                    font: {
+                                        size: 11
+                                    }
+                                }
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        const label = context.label || '';
+                                        const value = context.parsed;
+                                        const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                        const percentage = Math.round((value / total) * 100);
+                                        return `${label}: ${value} laporan (${percentage}%)`;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Chart 2: Distribusi Status PNBP (Doughnut Chart)
+            const statusCtx = document.getElementById('statusChart');
+            if (statusCtx) {
+                new Chart(statusCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: statusData.map(item => item.status_pnbp),
+                        datasets: [{
+                            data: statusData.map(item => item.total_pnbp),
+                            backgroundColor: [
+                                'rgba(239, 68, 68, 0.8)',   // Belum Setor - merah
+                                'rgba(16, 185, 129, 0.8)',  // Sudah Setor - hijau
+                                'rgba(59, 130, 246, 0.8)',  // Dibebaskan - biru
+                            ],
+                            borderWidth: 2,
+                            borderColor: '#ffffff',
+                            hoverOffset: 15
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: {
+                                    padding: 20,
+                                    usePointStyle: true,
+                                    font: {
+                                        size: 11
+                                    }
+                                }
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        const label = context.label || '';
+                                        const value = context.parsed;
+                                        return `${label}: Rp ${value.toLocaleString('id-ID')}`;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Chart 3: Trend PNBP Per Bulan (Line Chart)
+            const monthlyCtx = document.getElementById('monthlyChart');
+            if (monthlyCtx) {
+                new Chart(monthlyCtx, {
+                    type: 'line',
+                    data: {
+                        labels: bulanLabels,
+                        datasets: [{
+                            label: 'Total PNBP',
+                            data: bulanData,
+                            borderColor: 'rgba(59, 130, 246, 1)',
+                            backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                            borderWidth: 3,
+                            fill: true,
+                            tension: 0.4,
+                            pointBackgroundColor: 'rgba(59, 130, 246, 1)',
+                            pointBorderColor: '#ffffff',
+                            pointBorderWidth: 2,
+                            pointRadius: 5,
+                            pointHoverRadius: 7
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return `PNBP: Rp ${context.parsed.y.toLocaleString('id-ID')}`;
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                grid: {
+                                    drawBorder: false
+                                },
+                                ticks: {
+                                    callback: function(value) {
+                                        if (value >= 1000000000) {
+                                            return 'Rp ' + (value / 1000000000).toFixed(1) + 'M';
+                                        } else if (value >= 1000000) {
+                                            return 'Rp ' + (value / 1000000).toFixed(1) + 'Jt';
+                                        } else {
+                                            return 'Rp ' + value.toLocaleString('id-ID');
+                                        }
+                                    }
+                                }
+                            },
+                            x: {
+                                grid: {
+                                    display: false
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Animasi untuk chart saat muncul
+            AOS.refresh();
+        });
+    </script>
+    @endpush
+
     <style>
         .pagination {
             display: flex;
@@ -398,6 +681,12 @@
         .page-item:not(.disabled) .page-link:hover {
             background-color: #f3f4f6;
             border-color: #d1d5db;
+        }
+
+        /* Chart container styling */
+        canvas {
+            max-width: 100%;
+            height: auto !important;
         }
     </style>
 </x-app-layout>
