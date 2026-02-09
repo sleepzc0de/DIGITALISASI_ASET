@@ -118,6 +118,180 @@
             </div>
         </div>
 
+        <!-- Charts Section -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8" data-aos="fade-up" data-aos-delay="100">
+            <!-- Chart 1: Distribusi Alasan Penghapusan -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 border border-gray-100">
+                <div class="flex items-center justify-between mb-6">
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-900">Distribusi Alasan Penghapusan</h3>
+                        <p class="text-gray-500 text-sm mt-1">Persentase berdasarkan alasan penghapusan</p>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <span class="text-xs text-gray-500">{{ $stats['total'] }} Total SK</span>
+                    </div>
+                </div>
+                <div class="h-72 relative">
+                    <canvas id="alasanChart"></canvas>
+                    <div id="alasanLegend" class="mt-4 flex flex-wrap gap-2 justify-center"></div>
+                </div>
+            </div>
+
+            <!-- Chart 2: Trend Bulanan -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 border border-gray-100">
+                <div class="flex items-center justify-between mb-6">
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-900">Trend SK Penghapusan</h3>
+                        <p class="text-gray-500 text-sm mt-1">12 bulan terakhir</p>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <div class="flex items-center">
+                            <div class="w-3 h-3 rounded-full bg-blue-500 mr-2"></div>
+                            <span class="text-xs text-gray-600">Jumlah SK</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-3 h-3 rounded-full bg-green-500 mr-2"></div>
+                            <span class="text-xs text-gray-600">Nilai (juta)</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="h-72">
+                    <canvas id="trendChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Chart 3: Distribusi Nilai per Status -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 border border-gray-100 lg:col-span-1">
+                <div class="flex items-center justify-between mb-6">
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-900">Nilai Buku per Status</h3>
+                        <p class="text-gray-500 text-sm mt-1">Total nilai buku (dalam juta)</p>
+                    </div>
+                    <div class="text-sm text-gray-600">
+                        Rp {{ number_format($stats['total_nilai'], 0, ',', '.') }}
+                    </div>
+                </div>
+                <div class="h-72">
+                    <canvas id="statusValueChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Chart 4: Top 5 Aset dengan Nilai Tertinggi -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 border border-gray-100 lg:col-span-1">
+                <div class="flex items-center justify-between mb-6">
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-900">Top 5 Aset Penghapusan</h3>
+                        <p class="text-gray-500 text-sm mt-1">Nilai buku tertinggi (juta)</p>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <span class="text-xs px-2 py-1 bg-blue-100 text-blue-800 rounded-full">Tertinggi</span>
+                    </div>
+                </div>
+                <div class="h-72">
+                    <canvas id="topAssetsChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Mini Stats Cards -->
+            <div class="lg:col-span-2 grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl p-5 border border-gray-200">
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 rounded-lg bg-gray-200 flex items-center justify-center mr-3">
+                            <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="text-sm font-medium text-gray-600">Draft</p>
+                            <p class="text-2xl font-bold text-gray-900">
+                                {{ $chartData['status_distribution']['draft'] }}</p>
+                        </div>
+                    </div>
+                    <div class="mt-2">
+                        <div class="w-full bg-gray-200 rounded-full h-2">
+                            <div class="bg-gray-600 h-2 rounded-full"
+                                style="width: {{ $stats['total'] > 0 ? ($chartData['status_distribution']['draft'] / $stats['total']) * 100 : 0 }}%">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-5 border border-blue-200">
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 rounded-lg bg-blue-200 flex items-center justify-center mr-3">
+                            <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="text-sm font-medium text-blue-600">Proses</p>
+                            <p class="text-2xl font-bold text-blue-900">
+                                {{ $chartData['status_distribution']['proses'] }}</p>
+                        </div>
+                    </div>
+                    <div class="mt-2">
+                        <div class="w-full bg-blue-200 rounded-full h-2">
+                            <div class="bg-blue-600 h-2 rounded-full"
+                                style="width: {{ $stats['total'] > 0 ? ($chartData['status_distribution']['proses'] / $stats['total']) * 100 : 0 }}%">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-5 border border-green-200">
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 rounded-lg bg-green-200 flex items-center justify-center mr-3">
+                            <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="text-sm font-medium text-green-600">Selesai</p>
+                            <p class="text-2xl font-bold text-green-900">
+                                {{ $chartData['status_distribution']['selesai'] }}</p>
+                        </div>
+                    </div>
+                    <div class="mt-2">
+                        <div class="w-full bg-green-200 rounded-full h-2">
+                            <div class="bg-green-600 h-2 rounded-full"
+                                style="width: {{ $stats['total'] > 0 ? ($chartData['status_distribution']['selesai'] / $stats['total']) * 100 : 0 }}%">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-red-50 to-red-100 rounded-xl p-5 border border-red-200">
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 rounded-lg bg-red-200 flex items-center justify-center mr-3">
+                            <svg class="w-5 h-5 text-red-600" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="text-sm font-medium text-red-600">Dibatalkan</p>
+                            <p class="text-2xl font-bold text-red-900">
+                                {{ $chartData['status_distribution']['dibatalkan'] }}</p>
+                        </div>
+                    </div>
+                    <div class="mt-2">
+                        <div class="w-full bg-red-200 rounded-full h-2">
+                            <div class="bg-red-600 h-2 rounded-full"
+                                style="width: {{ $stats['total'] > 0 ? ($chartData['status_distribution']['dibatalkan'] / $stats['total']) * 100 : 0 }}%">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Filter Section -->
         <div class="bg-white rounded-2xl shadow-soft p-6 mb-8 border border-gray-100" data-aos="fade-up"
             data-aos-delay="100">
