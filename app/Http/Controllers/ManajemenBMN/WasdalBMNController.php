@@ -42,4 +42,6 @@ class WasdalBMNController extends Controller
     {
         return view('manajemen-bmn.wasdal.show', compact('wasdal'));
     }
+
+
 }

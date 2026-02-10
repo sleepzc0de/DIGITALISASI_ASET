@@ -10,7 +10,7 @@ class WasdalBMN extends Model
 {
     use HasFactory;
 
-     protected $table = 'wasdal_bmns';
+    protected $table = 'wasdal_bmns';
 
     protected $fillable = [
         'jenis_wasdal',
@@ -52,7 +52,7 @@ class WasdalBMN extends Model
 
     public function getStatusBadgeClass(): string
     {
-        return match($this->status) {
+        return match ($this->status) {
             'Draft' => 'bg-gray-100 text-gray-800',
             'Submitted' => 'bg-blue-100 text-blue-800',
             'Reviewed' => 'bg-yellow-100 text-yellow-800',
