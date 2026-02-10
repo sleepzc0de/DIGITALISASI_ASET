@@ -64,6 +64,7 @@ class PenatausahaanBMN extends Model
             'Kendaraan Dinas Operasional' => 'bg-orange-100 text-orange-800',
             'Kendaraan Dinas Jabatan' => 'bg-red-100 text-red-800',
             'Kendaraan Dinas Fungsional' => 'bg-pink-100 text-pink-800',
+            'Peralatan Kantor' => 'bg-indigo-100 text-indigo-800',
             default => 'bg-gray-100 text-gray-800',
         };
     }
@@ -74,5 +75,34 @@ class PenatausahaanBMN extends Model
             return Storage::url($this->foto_aset);
         }
         return 'https://ui-avatars.com/api/?name=' . urlencode($this->nama_barang) . '&color=4F46E5&background=EEF2FF&size=200';
+    }
+
+    // Method untuk data chart
+    public static function getChartData()
+    {
+        return [
+            'kategori_distribution' => self::select('kategori')
+                ->selectRaw('COUNT(*) as count, SUM(nilai_buku) as total_value')
+                ->groupBy('kategori')
+                ->get(),
+
+            'kondisi_distribution' => self::select('kondisi')
+                ->selectRaw('COUNT(*) as count')
+                ->groupBy('kondisi')
+                ->get(),
+
+            'status_distribution' => self::select('status_aset')
+                ->selectRaw('COUNT(*) as count')
+                ->whereNotNull('status_aset')
+                ->groupBy('status_aset')
+                ->get(),
+
+            'yearly_trend' => self::selectRaw('YEAR(tanggal_perolehan) as year')
+                ->selectRaw('COUNT(*) as count, SUM(nilai_buku) as total_value')
+                ->whereNotNull('tanggal_perolehan')
+                ->groupBy('year')
+                ->orderBy('year')
+                ->get(),
+        ];
     }
 }
