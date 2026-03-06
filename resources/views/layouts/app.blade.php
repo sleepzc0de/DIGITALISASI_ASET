@@ -12,7 +12,7 @@
 
     <title>
         @isset($title)
-            {{ $title }} — {{ config('app.name', 'Sistem Informasi Digitalisasi Aset') }}
+            {{ $title }} | {{ config('app.name', 'Sistem Informasi Digitalisasi Aset') }}
         @else
             {{ config('app.name', 'Sistem Informasi Digitalisasi Aset') }}
         @endisset
