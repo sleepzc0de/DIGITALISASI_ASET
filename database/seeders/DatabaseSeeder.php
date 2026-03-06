@@ -10,11 +10,11 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             UserSeeder::class,
-            DashboardAsetSeeder::class,
-            KinerjaBMNSeeder::class,
-            AplikasiBMNSeeder::class,
-            PemanfaatanBMNSeeder::class,
-            PerencanaanBMNSeeder::class,
+            // DashboardAsetSeeder::class,
+            // KinerjaBMNSeeder::class,
+            // AplikasiBMNSeeder::class,
+            // PemanfaatanBMNSeeder::class,
+            // PerencanaanBMNSeeder::class,
         ]);
     }
 }
