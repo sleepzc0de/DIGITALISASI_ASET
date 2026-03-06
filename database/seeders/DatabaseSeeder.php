@@ -10,7 +10,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             UserSeeder::class,
-            // DashboardAsetSeeder::class,
+            DashboardAsetSeeder::class,
             // KinerjaBMNSeeder::class,
             // AplikasiBMNSeeder::class,
             // PemanfaatanBMNSeeder::class,
