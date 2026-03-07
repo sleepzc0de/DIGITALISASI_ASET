@@ -37,8 +37,8 @@ class DashboardAsetController extends Controller
         if ($search = $request->get('search')) {
             $query->where(function ($q) use ($search) {
                 $q->where('kategori_aset', 'like', '%' . $search . '%')
-                  ->orWhere('lokasi',       'like', '%' . $search . '%')
-                  ->orWhere('keterangan',   'like', '%' . $search . '%');
+                    ->orWhere('lokasi',       'like', '%' . $search . '%')
+                    ->orWhere('keterangan',   'like', '%' . $search . '%');
             });
         }
 
@@ -58,17 +58,21 @@ class DashboardAsetController extends Controller
         // ── Summary stats via cache ──────────────────────────────────────
         // Hitung dari DB langsung (bukan dari paginated collection)
         // agar angka mencerminkan SEMUA data, bukan hanya halaman aktif.
-        $stats = Cache::remember(self::CACHE_KEY, self::CACHE_TTL, function () {
-            return DashboardAset::query()
-                ->selectRaw('
-                    COUNT(*)                          AS total_aset,
-                    SUM(nilai_buku)                   AS total_nilai_buku,
-                    AVG(nilai_buku)                   AS avg_nilai_buku,
-                    COUNT(DISTINCT kategori_aset)     AS total_kategori,
-                    COUNT(DISTINCT lokasi)            AS total_lokasi
-                ')
-                ->first();
-        });
+       $stats = Cache::remember(self::CACHE_KEY, self::CACHE_TTL, function () {
+    return DashboardAset::query()
+        ->selectRaw("
+            COUNT(*)                                                       AS total_aset,
+            SUM(nilai_buku)                                                AS total_nilai_buku,
+            SUM(nilai_perolehan)                                           AS total_nilai_perolehan,
+            AVG(nilai_buku)                                                AS avg_nilai_buku,
+            COUNT(DISTINCT kategori_aset)                                  AS total_kategori,
+            COUNT(DISTINCT lokasi)                                         AS total_lokasi,
+            SUM(CASE WHEN kondisi = 'Baik'         THEN 1 ELSE 0 END)     AS total_baik,
+            SUM(CASE WHEN kondisi = 'Rusak Ringan' THEN 1 ELSE 0 END)     AS total_rusak_ringan,
+            SUM(CASE WHEN kondisi = 'Rusak Berat'  THEN 1 ELSE 0 END)     AS total_rusak_berat
+        ")
+        ->first();
+});
 
         return view('admin.dashboard-aset.index', compact('asets', 'stats'));
     }
