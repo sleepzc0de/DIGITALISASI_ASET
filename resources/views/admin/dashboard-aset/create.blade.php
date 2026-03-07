@@ -1,16 +1,70 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-            <div>
-                <h2 class="text-2xl font-bold text-gray-900">{{ __('Tambah Data Aset') }}</h2>
-                <p class="mt-1 text-sm text-gray-600">Tambahkan data aset BMN baru ke dalam sistem</p>
+    {{-- Breadcrumb --}}
+    <nav aria-label="Breadcrumb" class="mb-3">
+        <ol class="flex items-center gap-1.5 text-xs text-gray-500">
+            <li>
+                <a href="{{ route('dashboard') }}"
+                   class="flex items-center gap-1 hover:text-blue-600 transition-colors">
+                    <i class="fas fa-home text-[10px]" aria-hidden="true"></i>
+                    Dashboard
+                </a>
+            </li>
+            <li aria-hidden="true">
+                <i class="fas fa-chevron-right text-[9px] text-gray-300"></i>
+            </li>
+            <li>
+                <a href="{{ route('admin.dashboard-aset.index') }}"
+                   class="hover:text-blue-600 transition-colors">
+                    Manajemen Aset
+                </a>
+            </li>
+            <li aria-hidden="true">
+                <i class="fas fa-chevron-right text-[9px] text-gray-300"></i>
+            </li>
+            <li>
+                <span class="font-medium text-gray-700" aria-current="page">
+                    Tambah Aset
+                </span>
+            </li>
+        </ol>
+    </nav>
+
+    {{-- Header utama --}}
+    <div class="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+
+        {{-- Judul --}}
+        <div class="flex items-start gap-3 min-w-0">
+            <div class="flex-shrink-0 h-11 w-11 rounded-xl
+                        bg-gradient-to-br from-emerald-500 to-emerald-700
+                        flex items-center justify-center shadow-md shadow-emerald-200">
+                <i class="fas fa-plus text-white text-lg" aria-hidden="true"></i>
             </div>
+            <div class="min-w-0">
+                <h2 class="text-xl font-bold text-gray-900 leading-tight">
+                    Tambah Data Aset
+                </h2>
+                <p class="mt-0.5 text-sm text-gray-500 leading-snug">
+                    Tambahkan data aset BMN baru ke dalam sistem
+                </p>
+            </div>
+        </div>
+
+        {{-- Aksi --}}
+        <div class="flex items-center gap-2 flex-shrink-0">
             <a href="{{ route('admin.dashboard-aset.index') }}"
-               class="btn-secondary flex items-center self-start sm:self-auto">
-                <i class="fas fa-arrow-left mr-2" aria-hidden="true"></i>Kembali
+               class="inline-flex items-center gap-2 px-4 py-2.5
+                      bg-white border border-gray-300 hover:border-gray-400
+                      text-gray-700 hover:text-gray-900 text-sm font-medium
+                      rounded-xl shadow-sm hover:shadow transition-all duration-200
+                      focus:outline-none focus:ring-2 focus:ring-gray-400
+                      focus:ring-offset-2">
+                <i class="fas fa-arrow-left text-xs" aria-hidden="true"></i>
+                Kembali
             </a>
         </div>
-    </x-slot>
+    </div>
+</x-slot>
 
     <div class="py-8">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
