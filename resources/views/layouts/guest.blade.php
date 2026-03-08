@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="utf-8">
+    <meta name="developer" content="Auliya Putra Azhari">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ __('Login') }} - {{ config('app.name', 'Digitalisasi Aset') }}</title>
@@ -16,7 +17,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     </noscript>
 
-    <link rel="icon" type="image/png" href="{{ asset('logo_kemenkeu.png') }}">
+    <link rel="icon" type="image/png" href="{{ asset('kemenkeu_hd.png') }}">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <style>
@@ -283,14 +284,16 @@
             </svg>
             {{-- Core --}}
             <div class="logo-core">
-                <img src="{{ asset('logo_kemenkeu.png') }}" alt="Logo Digitalisasi Aset" class="w-8 h-8 object-contain">
+                <img src="{{ asset('kemenkeu_hd.png') }}" alt="Logo Digitalisasi Aset" class="w-8 h-8 object-contain">
             </div>
         </div>
 
         {{-- Teks --}}
         <div class="text-center space-y-1">
             <p class="text-white font-semibold text-sm tracking-widest uppercase">
-                Digitalisasi Aset
+                Sistem Informasi Digitalisasi Aset
+                <br>
+                (SiDITA)
             </p>
             <p id="loading-percent" aria-live="polite">Memuat... <span id="pct">0</span>%</p>
         </div>
@@ -365,7 +368,7 @@
             group-hover:shadow-black/40
             group-hover:scale-110
             transition-all duration-300 icon-bounce p-1.5">
-                                <img src="{{ asset('logo_kemenkeu.png') }}" alt="Logo Digitalisasi Aset"
+                                <img src="{{ asset('kemenkeu_hd.png') }}" alt="Logo Digitalisasi Aset"
                                     class="w-full h-full object-contain">
                             </div>
                         </div>
@@ -373,7 +376,7 @@
                             <span
                                 class="block text-lg font-bold text-white
                                          tracking-tight leading-none">
-                                Digitalisasi Aset
+                                Sistem Informasi Digitalisasi Aset
                             </span>
                             <span
                                 class="block text-xs text-slate-400 mt-1 font-medium
@@ -388,7 +391,7 @@
                 <div class="max-w-md" data-aos="fade-right" data-aos-delay="200">
 
                     {{-- Badge --}}
-                    <div class="inline-flex items-center gap-2 px-3 py-1.5
+                    {{-- <div class="inline-flex items-center gap-2 px-3 py-1.5
                                 rounded-full border border-blue-500/30
                                 bg-blue-500/10 backdrop-blur-sm mb-8"
                         data-aos="fade-up" data-aos-delay="250">
@@ -398,16 +401,16 @@
                         <span class="text-blue-300 text-xs font-medium tracking-wide">
                             Sistem Aktif & Aman
                         </span>
-                    </div>
+                    </div> --}}
 
                     <h1 class="text-4xl xl:text-5xl font-bold text-white
                                 leading-[1.15] tracking-tight mb-6"
                         data-aos="fade-up" data-aos-delay="300">
-                        Satu Platform,<br>
+
                         <span
                             class="text-transparent bg-clip-text
                                      bg-gradient-to-r from-blue-400 via-violet-400 to-cyan-400">
-                            Kelola Seluruh Aset
+                            Sistem Informasi Digitalisasi Aset
                         </span>
                     </h1>
 
@@ -440,7 +443,7 @@
                 {{-- Footer kiri --}}
                 <div class="text-xs text-slate-600 font-medium tracking-wide" data-aos="fade-up"
                     data-aos-delay="450">
-                    © {{ date('Y') }} · Biro Manajemen BMN dan Pengadaan
+                    © {{ date('Y') }} · Powered By Biro Manajemen BMN dan Pengadaan
                 </div>
             </div>
 
@@ -485,18 +488,18 @@
                                 class="w-9 h-9 rounded-xl
             bg-slate-800 border border-slate-700/60
             flex items-center justify-center p-1.5">
-                                <img src="{{ asset('logo_kemenkeu.png') }}" alt="Logo Digitalisasi Aset"
+                                <img src="{{ asset('kemenkeu_hd.png') }}" alt="Logo Digitalisasi Aset"
                                     class="w-full h-full object-contain">
                             </div>
                             <div>
-                                <span class="text-sm font-bold text-white">Digitalisasi Aset</span>
+                                <span class="text-sm font-bold text-white">Sistem Informasi Digitalisasi Aset</span>
                                 <p class="text-[10px] text-slate-500 uppercase tracking-wide">
                                     Kementerian Keuangan RI
                                 </p>
                             </div>
                         </div>
 
-                        <h2 class="text-xl font-bold text-white mb-1">Selamat Datang</h2>
+                        <h2 class="text-xl font-bold text-white mb-1">Selamat Datang, Sobat Aset !</h2>
                         <p class="text-slate-400 text-sm">
                             Masuk untuk mengakses SIDITA
                         </p>
@@ -507,8 +510,7 @@
 
                     {{-- Footer card --}}
                     <p class="text-center text-xs text-slate-600 mt-8">
-                        © {{ date('Y') }} Digitalisasi Aset · Hak cipta dilindungi
-                    </p>
+                        © {{ date('Y') }} Sistem Informasi Digitalisasi Aset</p>
                 </div>
             </div>
         </section>

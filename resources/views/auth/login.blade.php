@@ -574,4 +574,97 @@
         })();
     </script>
 
+    {{-- ══════════════════════════════════════════════════════
+     INFO PENTING NOTIFICATION
+══════════════════════════════════════════════════════ --}}
+    <div id="infoNotif" class="mt-5 rounded-xl border border-amber-500/20
+            bg-amber-500/5 overflow-hidden">
+
+        {{-- Header --}}
+        <button type="button" id="infoToggle"
+            class="w-full flex items-center gap-3 px-4 py-3
+                   hover:bg-amber-500/5 transition-colors duration-150
+                   focus:outline-none focus-visible:ring-1
+                   focus-visible:ring-amber-500/50"
+            aria-expanded="true" aria-controls="infoContent">
+            {{-- Icon badge --}}
+            <span
+                class="flex-shrink-0 w-6 h-6 rounded-full
+                      bg-amber-500/15 border border-amber-500/30
+                      flex items-center justify-center">
+                <i class="fas fa-shield-halved text-amber-400" style="font-size:10px;" aria-hidden="true"></i>
+            </span>
+            {{-- Title --}}
+            <span
+                class="flex-1 text-left text-xs font-semibold
+                      text-amber-400 tracking-wide uppercase">
+                Info Penting
+            </span>
+            {{-- Pulse dot --}}
+            <span class="flex-shrink-0 relative flex items-center
+                      justify-center mr-1"
+                aria-hidden="true">
+                <span
+                    class="absolute w-3 h-3 rounded-full
+                          bg-amber-400/30 animate-ping"></span>
+                <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
+            </span>
+            {{-- Chevron --}}
+            <i id="infoChevron"
+                class="fas fa-chevron-up text-slate-500 flex-shrink-0
+                  transition-transform duration-300"
+                style="font-size:10px;" aria-hidden="true"></i>
+        </button>
+
+        {{-- Content --}}
+        <div id="infoContent" class="transition-all duration-300 ease-out"
+            style="max-height: 500px; overflow: hidden;">
+
+            {{-- Divider --}}
+            <div class="mx-4 border-t border-amber-500/10"></div>
+
+            <ul class="px-4 py-3 space-y-2.5" role="list">
+                @foreach (['Jangan bagikan <strong>ID & kata sandi</strong> Anda kepada siapapun.', 'Penyalahgunaan akun sepenuhnya menjadi <strong>tanggung jawab pengguna</strong>.', 'Data Anda dijaga dengan <strong>kerahasiaan penuh</strong> oleh sistem SIDITA.', 'Semua fitur SIDITA dapat diakses <strong>gratis</strong>, tanpa biaya tambahan.'] as $info)
+                    <li class="flex items-start gap-2.5">
+                        <span
+                            class="flex-shrink-0 mt-0.5 w-4 h-4 rounded-full
+                                  bg-amber-500/10 border border-amber-500/20
+                                  flex items-center justify-center">
+                            <i class="fas fa-check text-amber-400/80" style="font-size:8px;" aria-hidden="true"></i>
+                        </span>
+                        <p class="text-xs text-slate-400 leading-relaxed">
+                            {!! $info !!}
+                        </p>
+                    </li>
+                @endforeach
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            const toggle = document.getElementById('infoToggle');
+            const content = document.getElementById('infoContent');
+            const chevron = document.getElementById('infoChevron');
+
+            if (!toggle || !content) return;
+
+            toggle.addEventListener('click', function() {
+                const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+
+                if (isOpen) {
+                    content.style.maxHeight = '0';
+                    chevron.style.transform = 'rotate(180deg)';
+                    toggle.setAttribute('aria-expanded', 'false');
+                } else {
+                    content.style.maxHeight = '500px';
+                    chevron.style.transform = 'rotate(0deg)';
+                    toggle.setAttribute('aria-expanded', 'true');
+                }
+            }, {
+                passive: true
+            });
+        })();
+    </script>
+
 </x-guest-layout>

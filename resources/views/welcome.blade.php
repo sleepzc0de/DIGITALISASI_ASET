@@ -14,14 +14,14 @@
     <meta property="og:url" content="https://digitalisasi-aset.kemenkeu.go.id/">
     <meta property="og:title" content="Digitalisasi Aset BMN - Kementerian Keuangan RI">
     <meta property="og:description" content="Sistem informasi digitalisasi aset BMN Kementerian Keuangan.">
-    <meta property="og:image" content="{{ asset('logo_kemenkeu.png') }}">
+    <meta property="og:image" content="{{ asset('kemenkeu_hd.png') }}">
     <meta property="og:site_name" content="Digitalisasi Aset Kemenkeu">
     <meta property="og:locale" content="id_ID">
     <meta name="twitter:card" content="summary_large_image">
     <link rel="canonical" href="https://digitalisasi-aset.kemenkeu.go.id">
-    <link rel="icon" type="image/png" href="{{ asset('logo_kemenkeu.png') }}">
-    <link rel="shortcut icon" type="image/png" href="{{ asset('logo_kemenkeu.png') }}">
-    <link rel="apple-touch-icon" href="{{ asset('logo_kemenkeu.png') }}">
+    <link rel="icon" type="image/png" href="{{ asset('kemenkeu_hd.png') }}">
+    <link rel="shortcut icon" type="image/png" href="{{ asset('kemenkeu_hd.png') }}">
+    <link rel="apple-touch-icon" href="{{ asset('kemenkeu_hd.png') }}">
     <title>Digitalisasi Aset BMN - Kementerian Keuangan</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
