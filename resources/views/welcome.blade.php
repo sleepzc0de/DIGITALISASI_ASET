@@ -9,6 +9,7 @@
     <meta name="keywords" content="BMN, Barang Milik Negara, Digitalisasi Aset, Kementerian Keuangan">
     <meta name="author" content="Biro Manajemen BMN dan Pengadaan - Kementerian Keuangan RI">
     <meta name="robots" content="index, follow">
+    <meta name="developer" content="Auliya Putra Azhari">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://digitalisasi-aset.kemenkeu.go.id/">
     <meta property="og:title" content="Digitalisasi Aset BMN - Kementerian Keuangan RI">
